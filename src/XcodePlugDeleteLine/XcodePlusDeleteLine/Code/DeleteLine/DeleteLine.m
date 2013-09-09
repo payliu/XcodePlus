@@ -66,7 +66,7 @@
         NSMenuItem *newMenuItem = [[NSMenuItem alloc] initWithTitle:@"Delete Line" action:@selector(deleteLine:) keyEquivalent:@"d"];
         
         [newMenuItem setTarget:self];
-        [newMenuItem setKeyEquivalentModifierMask:NSControlKeyMask];
+        [newMenuItem setKeyEquivalentModifierMask:NSCommandKeyMask];
         [[editMenuItem submenu] addItem:newMenuItem];
         [newMenuItem release];
     }

@@ -8,7 +8,10 @@ Xcode plugin to plus extra feature.
 # Usage
 ### Delete Line
 
-The default short-cut is `^d`, if you would like change it, please refer to [Custom Shortcut](#custom-shortcut)
+The default short-cut is `⌘D`, like in Eclipse.
+
+This shortcut should conflict to `Duplicate`, just remove it form `Key Bindings`.
+Or you would like to set different shortcut, please refer to [Custom Shortcut](#custom-shortcut).
 
 - Xcode > menu > Edit > `Delete Line`
 
@@ -35,15 +38,20 @@ $HOME/Library/Application\ Support/Developer/Shared/Xcode/Plug-ins/XcodePlus\ De
 	
 # Custom Shortcut
 
-If you want the shortcut of `delete-line` like Eclipse using `⌘D`.
+#### Resovle Conflict of Key Bindings
 
-- open `System Preferences` > `Keyboard` > `Keyboard Shortcuts` 
-![shortcut]
 - If conflict, check your shortcut and remove from `Key Bindings` in Xcode.
 	- conflict `Duplicate`, `⌘D`
 ![xcode-key-bindings]
 	- conflict `Delete Forward`, `^D`
 ![xcode-key-bindings-2]
+
+#### Use my shortcut
+If you want to change the shortcut of `delete-line` you like.
+
+- open `System Preferences` > `Keyboard` > `Keyboard Shortcuts`
+  - At Step#5, press the shoutcut you want.
+![shortcut]
 
 #License
 MIT License
