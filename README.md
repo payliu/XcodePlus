@@ -17,7 +17,7 @@ The default short-cut is `^d`, if you would like change it, please refer to [Cus
 #Installation
 
 1. install via [Alcatraz][alcatraz].
-2. Restart Xcodeg
+2. Restart Xcode
 
 or
 
