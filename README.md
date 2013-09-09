@@ -40,7 +40,10 @@ If you want the shortcut of `delete-line` like Eclipse using `⌘D`.
 - open `System Preferences` > `Keyboard` > `Keyboard Shortcuts` 
 ![shortcut]
 - If conflict, check your shortcut and remove from `Key Bindings` in Xcode.
+	- conflict `Duplicate`, `⌘D`
 ![xcode-key-bindings]
+	- conflict `Delete Forward`, `^D`
+![xcode-key-bindings-2]
 
 #License
 MIT License
@@ -51,3 +54,4 @@ MIT License
 [deleteline-git]: https://raw.github.com/payliu/XcodePlus/master/screenshot/deleteline.gif
 [shortcut]: https://raw.github.com/payliu/XcodePlus/master/screenshot/custom-shortcut.png
 [xcode-key-bindings]: https://raw.github.com/payliu/XcodePlus/master/screenshot/xcode-key-bindings.png
+[xcode-key-bindings-2]: https://raw.github.com/payliu/XcodePlus/master/screenshot/xcode-key-bindings-2.png
