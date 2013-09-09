@@ -8,7 +8,7 @@ Xcode plugin to plus extra feature.
 # Usage
 ### Delete Line
 
-The default short-cut is `^d`, if you would like change it, please refer to [Custom Shortcut](#Custom-Shortcut)
+The default short-cut is `^d`, if you would like change it, please refer to [Custom Shortcut](#custom-shortcut)
 
 - Xcode > menu > Edit > `Delete Line`
 
