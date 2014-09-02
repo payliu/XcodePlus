@@ -9,6 +9,6 @@
 @interface DeleteLine : NSObject
 
 @property (nonatomic, assign) NSRange selectedLineRange;
-@property (nonatomic, retain) NSTextView *currentTextView;
+@property (nonatomic, strong) NSTextView *currentTextView;
 
 @end
