@@ -241,10 +241,10 @@
 		6F44EA0517DD324B0064F1B7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEPLOYMENT_LOCATION = YES;
 				DSTROOT = "${HOME}";
-				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "XcodePlusDeleteLine/XcodePlus Delete Line-Prefix.pch";
 				INFOPLIST_FILE = "XcodePlusDeleteLine/XcodePlus Delete Line-Info.plist";
@@ -257,10 +257,10 @@
 		6F44EA0617DD324B0064F1B7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEPLOYMENT_LOCATION = YES;
 				DSTROOT = "${HOME}";
-				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "XcodePlusDeleteLine/XcodePlus Delete Line-Prefix.pch";
 				INFOPLIST_FILE = "XcodePlusDeleteLine/XcodePlus Delete Line-Info.plist";

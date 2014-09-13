@@ -10,7 +10,7 @@
 
 @interface DeleteLine ()
 
-@property (nonatomic, retain) NSString *deletedText;
+@property(nonatomic, strong) NSString *deletedText;
 
 @end
 
@@ -18,99 +18,97 @@
 
 @implementation DeleteLine
 
-- (void) dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [_currentTextView release];
-    [_deletedText release];
-    [super dealloc];
+- (void)dealloc {
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-+ (void) pluginDidLoad:(NSBundle *)plugin
-{
-    static id shared = nil;
-    
-    static dispatch_once_t onceToken;
-    
-    dispatch_once(&onceToken, ^{
-        
-        shared = [[self alloc] init];
-    });
++ (void)pluginDidLoad:(NSBundle *)plugin {
+  static id shared = nil;
+
+  static dispatch_once_t onceToken;
+
+  dispatch_once(&onceToken, ^{ shared = [[self alloc] init]; });
 }
 
-- (id) init
-{
-    self = [super init];
-    
-    if (self) {
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(applicationDidFinishLaunching:)
-                                                     name:NSApplicationDidFinishLaunchingNotification
-                                                   object:nil];
-        
+- (id)init {
+  self = [super init];
+
+  if (self) {
+
+    [[NSNotificationCenter defaultCenter]
+        addObserver:self
+           selector:@selector(applicationDidFinishLaunching:)
+               name:NSApplicationDidFinishLaunchingNotification
+             object:nil];
+  }
+
+  return self;
+}
+
+- (void)applicationDidFinishLaunching:(NSNotification *)notification {
+  [[NSNotificationCenter defaultCenter]
+      addObserver:self
+         selector:@selector(selectionDidChange:)
+             name:NSTextViewDidChangeSelectionNotification
+           object:nil];
+
+  NSMenuItem *editMenuItem = [[NSApp mainMenu] itemWithTitle:@"Edit"];
+
+  if (editMenuItem) {
+    [[editMenuItem submenu] addItem:[NSMenuItem separatorItem]];
+
+    NSMenuItem *newMenuItem =
+        [[NSMenuItem alloc] initWithTitle:@"Delete Line"
+                                   action:@selector(deleteLine:)
+                            keyEquivalent:@"d"];
+
+    [newMenuItem setTarget:self];
+    [newMenuItem setKeyEquivalentModifierMask:NSCommandKeyMask];
+    [[editMenuItem submenu] addItem:newMenuItem];
+  }
+}
+
+- (void)selectionDidChange:(NSNotification *)notification {
+  if ([[notification object] isKindOfClass:[NSTextView class]]) {
+
+    self.currentTextView = (NSTextView *)[notification object];
+
+    NSArray *selectedRanges = [self.currentTextView selectedRanges];
+
+    if (selectedRanges.count == 0) {
+      return;
     }
-    
-    return self;
+
+    NSRange selectedRange = [[selectedRanges objectAtIndex:0] rangeValue];
+
+    self.selectedLineRange = [self.currentTextView.textStorage.string
+        lineRangeForRange:selectedRange];
+
+    self.deletedText = [self.currentTextView.textStorage.string
+        substringWithRange:self.selectedLineRange];
+  }
 }
 
-- (void) applicationDidFinishLaunching:(NSNotification *)notification
-{
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(selectionDidChange:) name:NSTextViewDidChangeSelectionNotification object:nil];
-    
-    NSMenuItem *editMenuItem = [[NSApp mainMenu] itemWithTitle:@"Edit"];
-    
-    if (editMenuItem) {
-        [[editMenuItem submenu] addItem:[NSMenuItem separatorItem]];
-        
-        NSMenuItem *newMenuItem = [[NSMenuItem alloc] initWithTitle:@"Delete Line" action:@selector(deleteLine:) keyEquivalent:@"d"];
-        
-        [newMenuItem setTarget:self];
-        [newMenuItem setKeyEquivalentModifierMask:NSCommandKeyMask];
-        [[editMenuItem submenu] addItem:newMenuItem];
-        [newMenuItem release];
-    }
+- (void)showMessageBox:(NSString *)text {
+  NSAlert *alert = [[NSAlert alloc] init];
+
+  [alert setMessageText:text];
+  [alert runModal];
 }
 
-- (void) selectionDidChange:(NSNotification *)notification
-{
-    if ([[notification object] isKindOfClass:[NSTextView class]]) {
-        
-        self.currentTextView = (NSTextView *)[notification object];
-        
-        NSArray *selectedRanges = [self.currentTextView selectedRanges];
-        
-        if (selectedRanges.count == 0) {
-            return;
-        }
-        
-        NSRange selectedRange = [[selectedRanges objectAtIndex:0] rangeValue];
-        
-        self.selectedLineRange = [self.currentTextView.textStorage.string lineRangeForRange:selectedRange];
-        
-        self.deletedText = [self.currentTextView.textStorage.string substringWithRange:self.selectedLineRange];
-    }
-}
+- (void)deleteLine:(id)sender {
+  // [self showMessageBox:self.deletedText];
 
-- (void) showMessageBox:(NSString *)text
-{
-    NSAlert *alert = [[[NSAlert alloc] init] autorelease];
-    
-    [alert setMessageText:text];
-    [alert runModal];
-}
+  if ([self.currentTextView shouldChangeTextInRange:self.selectedLineRange
+                                  replacementString:@""]) {
 
-- (void) deleteLine:(id)sender
-{
-    // [self showMessageBox:self.deletedText];
-    
-    if ([self.currentTextView shouldChangeTextInRange:self.selectedLineRange replacementString:@""]) {
-        
-        [self.currentTextView.textStorage replaceCharactersInRange:self.selectedLineRange
-                                              withAttributedString:[[[NSAttributedString alloc] initWithString:@""] autorelease]];
-        
-        [self.currentTextView didChangeText];
-    }
+    [self.currentTextView.textStorage
+        replaceCharactersInRange:self.selectedLineRange
+            withAttributedString:[[NSAttributedString alloc]
+                                     initWithString:@""]];
+
+    [self.currentTextView didChangeText];
+  }
 }
 
 @end
