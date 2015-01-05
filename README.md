@@ -1,25 +1,25 @@
 XcodePlus
 =========
 
-Xcode plugin to plus extra feature.
+Xcode plugin to add extra feature.
 
-- delete line, even mulit-lines
+- delete line, even multi-lines
 
 # Usage
 ### Delete Line
 
-The default short-cut is `⌘D`, like in Eclipse.
+The default shortcut is `⌘D`, like in Eclipse.
 
-This shortcut should conflict to `Duplicate`, just remove it form `Key Bindings`.
+This shortcut should conflict to `Duplicate`, just remove it from `Key Bindings`.
 Or you would like to set different shortcut, please refer to [Custom Shortcut](#custom-shortcut).
 
 - Xcode > menu > Edit > `Delete Line`
 
 ![deleteline-git]
-	
+
 #Installation
 
-1. install via [Alcatraz][alcatraz].
+1. Install via [Alcatraz][alcatraz].
 2. Restart Xcode
 
 or
@@ -35,10 +35,10 @@ Delete the following directory
 ```
 $HOME/Library/Application\ Support/Developer/Shared/Xcode/Plug-ins/XcodePlus\ Delete\ Line.xcplugin
 ```
-	
+
 # Custom Shortcut
 
-#### Resovle Conflict of Key Bindings
+#### Resolve conflict of Key Bindings
 
 - If conflict, check your shortcut and remove from `Key Bindings` in Xcode.
 	- conflict `Duplicate`, `⌘D`
